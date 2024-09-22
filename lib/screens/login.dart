@@ -5,50 +5,26 @@ import 'package:my_app/routes.dart';
 import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class LoginScreen extends StatelessWidget {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController pwController = TextEditingController();
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  Future<void> login(String email, String password) async {
-    const String url = 'http://localhost:8080/login';
-    // if (email.isNotEmpty && password.isNotEmpty) {
-    //     Navigator.pushNamed(context, AppRoutes.homeScreen,
-    //         arguments: email);
-    //   } else {
-    //     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-    //       content: Text('Please enter a Email/PW'),
-    //     ));
-    //   }
+  LoginScreen({super.key});
+  Future<void> _signIn() async {
     try {
-      final response = await http.post(
-        Uri.parse(url),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(<String, String>{
-          'email': email,
-          'password': password,
-        }),
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: pwController.text,
       );
-      if (response.statusCode == 200) {
-        final responseData = jsonDecode(response.body);
-        print('Login successful : $responseData');
-      } else {
-        print('Failed to Login : ${response.body}');
-      }
-    } catch (error) {
-      print('Error : $error');
+      print("User signed in : ${userCredential.user?.email}");
+    } catch (e) {
+      print("Error : $e");
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController pwController = TextEditingController();
     return Scaffold(
         appBar: AppBar(
           title: const Text('Login Screen'),
@@ -86,14 +62,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   labelText: 'PASSWORD',
                   border: OutlineInputBorder(),
                 ),
+                obscureText: true,
               ),
               const SizedBox(height: 20),
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    final String email = emailController.text;
-                    final String password = pwController.text;
-                    login(email, password);
+                    _signIn();
                   },
                   child: const Text('Login'),
                 ),

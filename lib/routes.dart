@@ -8,7 +8,7 @@ class AppRoutes {
 
   static Map<String, WidgetBuilder> getRoutes() {
     return {
-      loginScreen: (context) => const LoginScreen(),
+      loginScreen: (context) => LoginScreen(),
       homeScreen: (context) => HomeScreen()
     };
   }
