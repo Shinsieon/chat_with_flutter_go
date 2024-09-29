@@ -1,0 +1,28 @@
+import 'package:flutter/material.dart';
+
+class CustomTextField extends StatelessWidget {
+  final String labelText;
+  final TextEditingController controller;
+  final bool obscureText;
+
+  const CustomTextField({
+    super.key,
+    required this.labelText,
+    required this.controller,
+    this.obscureText = false, // 기본값은 false
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: controller,
+      style: const TextStyle(color: Colors.white),
+      decoration: InputDecoration(
+        labelText: labelText,
+        labelStyle: const TextStyle(color: Colors.white),
+        border: const UnderlineInputBorder(),
+      ),
+      obscureText: obscureText,
+    );
+  }
+}

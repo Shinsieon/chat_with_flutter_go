@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:my_app/colors.dart';
 import 'package:my_app/firebase_options.dart';
 import 'package:my_app/routes.dart';
 import 'package:my_app/screens/home.dart';
-import 'package:my_app/screens/login.dart';
+import 'package:my_app/screens/signin.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,10 +18,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: ThemeData(
+        scaffoldBackgroundColor: AppColors.primaryColor,
+        fontFamily: 'Roboto', // 앱 전반에 Roboto 폰트 설정
+        primaryColor: Colors.white,
+        textTheme: const TextTheme(
+          bodyLarge: TextStyle(color: Colors.white), // 일반 텍스트 색상
+          bodyMedium: TextStyle(color: Colors.white),
+        ),
+      ),
       title: 'Chatter',
       //initialRoute: AppRoutes.loginScreen,
-      home: AuthStateHandler(),
+      home: const AuthStateHandler(),
     );
   }
 }
