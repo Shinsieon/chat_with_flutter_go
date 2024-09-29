@@ -4,12 +4,14 @@ class CustomTextField extends StatelessWidget {
   final String labelText;
   final TextEditingController controller;
   final bool obscureText;
+  final bool isEmail;
 
   const CustomTextField({
     super.key,
     required this.labelText,
     required this.controller,
     this.obscureText = false, // 기본값은 false
+    this.isEmail = false, // 기본값은 false
   });
 
   @override
@@ -23,6 +25,7 @@ class CustomTextField extends StatelessWidget {
         border: const UnderlineInputBorder(),
       ),
       obscureText: obscureText,
+      keyboardType: isEmail ? TextInputType.emailAddress : TextInputType.text,
     );
   }
 }

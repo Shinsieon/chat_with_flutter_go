@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:my_app/colors.dart';
+import 'package:my_app/components/CAppbar.dart';
+import 'package:my_app/routes.dart';
 import 'package:my_app/screens/room.dart';
 
 class ChatRoom {
@@ -45,38 +48,76 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String nickname =
-        ModalRoute.of(context)?.settings.arguments as String? ?? 'Guest';
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Welcome $nickname'),
+      appBar: const CustomAppBar(title: 'Chatter'),
+      body: ListView.builder(
+        itemCount: chatRooms.length,
+        itemBuilder: (context, index) {
+          final chatRoom = chatRooms[index];
+          return Card(
+            margin: const EdgeInsets.all(10),
+            child: ListTile(
+              title: Text(chatRoom.roomName),
+              subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Owner : ${chatRoom.ownerNickname}'),
+                    Text('Created at : ${formatDateTime(chatRoom.createdAt)}'),
+                    Text('Participants : ${chatRoom.participantCount}')
+                  ]),
+              isThreeLine: true,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => RoomScreen(chatRoom: chatRoom),
+                  ),
+                );
+              },
+            ),
+          );
+        },
+      ),
+      bottomNavigationBar: _buildBottomNavigationBar(context),
+    );
+  }
+
+  Widget _buildBottomNavigationBar(BuildContext context) {
+    final currentRoute = ModalRoute.of(context)?.settings.name;
+    if (currentRoute == AppRoutes.signInScreen) {
+      return const SizedBox
+          .shrink(); // Return an empty widget if on the login screen
+    }
+
+    return BottomNavigationBar(
+      items: const [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Home',
         ),
-        body: ListView.builder(
-            itemCount: chatRooms.length,
-            itemBuilder: (context, index) {
-              final chatRoom = chatRooms[index];
-              return Card(
-                  margin: const EdgeInsets.all(10),
-                  child: ListTile(
-                    title: Text(chatRoom.roomName),
-                    subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Owner : ${chatRoom.ownerNickname}'),
-                          Text(
-                              'Created at : ${formatDateTime(chatRoom.createdAt)}'),
-                          Text('Participants : ${chatRoom.participantCount}')
-                        ]),
-                    isThreeLine: true,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => RoomScreen(chatRoom: chatRoom),
-                        ),
-                      );
-                    },
-                  ));
-            }));
+        BottomNavigationBarItem(
+          icon: Icon(Icons.chat),
+          label: 'Chat',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.settings),
+          label: 'Settings',
+        ),
+      ],
+      onTap: (index) {
+        // Handle navigation based on the selected index
+        switch (index) {
+          case 0:
+            Navigator.pushNamed(context, AppRoutes.homeScreen);
+            break;
+          case 1:
+            Navigator.pushNamed(context, AppRoutes.homeScreen);
+            break;
+          case 2:
+            Navigator.pushNamed(context, AppRoutes.homeScreen);
+            break;
+        }
+      },
+    );
   }
 }

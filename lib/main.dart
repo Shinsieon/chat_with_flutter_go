@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/colors.dart';
 import 'package:my_app/firebase_options.dart';
-import 'package:my_app/routes.dart';
 import 'package:my_app/screens/home.dart';
 import 'package:my_app/screens/signin.dart';
 
@@ -48,7 +47,7 @@ class AuthStateHandler extends StatelessWidget {
           } else if (snapshot.hasData) {
             return HomeScreen();
           } else {
-            return LoginScreen();
+            return SignInScreen();
           }
         });
   }

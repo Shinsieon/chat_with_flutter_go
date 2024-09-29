@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/components/CAppbar.dart';
 import 'package:my_app/screens/home.dart';
 
 class Message {
@@ -38,7 +39,7 @@ class _RoomScreenState extends State<RoomScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.chatRoom.roomName)),
+      appBar: CustomAppBar(title: widget.chatRoom.roomName),
       body: Column(
         children: [
           // 메시지 리스트 영역
