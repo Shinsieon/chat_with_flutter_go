@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/components/CAppbar.dart';
-import 'package:my_app/screens/home.dart';
+import 'package:my_app/screens/chats.dart';
 
 class Message {
   final String sender;

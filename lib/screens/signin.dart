@@ -6,24 +6,22 @@ import 'package:my_app/components/CText.dart';
 import 'package:my_app/components/CTextField.dart';
 import 'package:my_app/enums.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:my_app/routes.dart';
 import 'package:my_app/screens/signup.dart';
 import 'package:my_app/utils/toast.dart';
 import 'package:my_app/utils/validator.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
+
+  @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController pwController = TextEditingController();
 
-  bool isValidEmail(String email) {
-    final RegExp emailRegex = RegExp(
-      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
-    );
-    return emailRegex.hasMatch(email);
-  }
-
-  SignInScreen({super.key});
   Future<bool> _signIn() async {
     if (emailController.text.isEmpty || pwController.text.isEmpty) {
       print("Email and Password cannot be empty");

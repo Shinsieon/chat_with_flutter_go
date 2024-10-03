@@ -10,14 +10,18 @@ import 'package:my_app/utils/toast.dart';
 import 'package:my_app/utils/validator.dart';
 
 class SignUpScreen extends StatelessWidget {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
 
   SignUpScreen({super.key});
 
   Future<bool> _signUp() async {
-    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
-      ToastUtil.showToast("Email and Password cannot be empty");
+    if (emailController.text.isEmpty ||
+        passwordController.text.isEmpty ||
+        usernameController.text.isEmpty) {
+      ToastUtil.showToast("All fields are required");
       return false;
     }
     if (!Validator.isValidEmail(emailController.text)) {
@@ -28,13 +32,16 @@ class SignUpScreen extends StatelessWidget {
     //For example, you can use Firebase Auth to create a user
     try {
       UserCredential userCredential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          await _auth.createUserWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
+      await userCredential.user
+          ?.updateProfile(displayName: usernameController.text);
+      await userCredential.user?.reload();
       ToastUtil.showToast(
-          "successfully signed up: ${userCredential.user?.email}");
-      // Navigate to the home screen
+          "successfully signed up: ${_auth.currentUser?.email}");
+      // Navigate to the home sc  reen
       return true;
     } catch (e) {
       print("Error: $e");
@@ -72,6 +79,11 @@ class SignUpScreen extends StatelessWidget {
               labelText: 'Password',
               controller: passwordController,
               obscureText: true,
+            ),
+            const SizedBox(height: 20),
+            CustomTextField(
+              labelText: 'Nickname or Username',
+              controller: usernameController,
             ),
             const SizedBox(height: 20),
             Row(

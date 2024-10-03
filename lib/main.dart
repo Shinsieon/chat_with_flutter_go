@@ -2,8 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/colors.dart';
+import 'package:my_app/components/main_layout.dart';
 import 'package:my_app/firebase_options.dart';
-import 'package:my_app/screens/home.dart';
+import 'package:my_app/routes.dart';
 import 'package:my_app/screens/signin.dart';
 
 void main() async {
@@ -28,6 +29,9 @@ class MyApp extends StatelessWidget {
         ),
       ),
       title: 'Chatter',
+      initialRoute: '/',
+      routes: AppRoutes.getRoutes(),
+      onGenerateRoute: AppRoutes.generateRoute,
       //initialRoute: AppRoutes.loginScreen,
       home: const AuthStateHandler(),
     );
@@ -45,9 +49,9 @@ class AuthStateHandler extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
           } else if (snapshot.hasData) {
-            return HomeScreen();
+            return const MainLayout();
           } else {
-            return SignInScreen();
+            return const SignInScreen();
           }
         });
   }
