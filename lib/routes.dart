@@ -14,10 +14,10 @@ class AppRoutes {
 
   static Map<String, WidgetBuilder> getRoutes() {
     return {
-      signInScreen: (context) => SignInScreen(),
+      signInScreen: (context) => const SignInScreen(),
       signUpScreen: (context) => SignUpScreen(),
       homeScreen: (context) => const HomeScreen(),
-      chatsScreen: (context) => ChatsScreen(),
+      chatsScreen: (context) => const ChatsScreen(),
     };
   }
 
@@ -27,15 +27,12 @@ class AppRoutes {
         final args = settings.arguments as RoomScreenArguments;
         return MaterialPageRoute(
           builder: (context) => RoomScreen(
-              chatRoom: ChatRoom(
-                  roomName: args.roomName,
-                  ownerNickname: args.ownerNickname,
-                  createdAt: args.createdAt,
-                  participantCount: args.participantCount)),
+            chatRoomId: args.roomName,
+          ),
         );
       default:
         return MaterialPageRoute(
-          builder: (context) => SignInScreen(),
+          builder: (context) => const SignInScreen(),
         );
     }
   }

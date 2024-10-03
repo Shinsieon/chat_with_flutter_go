@@ -41,13 +41,14 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAAoqSF42wKBjXMLEjHLCixwuQAsZnrqLQ',
-    appId: '1:429153088555:web:a81e657e484b00d157a66e',
-    messagingSenderId: '429153088555',
-    projectId: 'test-3fbc1',
-    authDomain: 'test-3fbc1.firebaseapp.com',
-    storageBucket: 'test-3fbc1.appspot.com',
-    measurementId: 'G-8Q9ES5P84T',
+    apiKey: "AIzaSyAAoqSF42wKBjXMLEjHLCixwuQAsZnrqLQ",
+    authDomain: "test-3fbc1.firebaseapp.com",
+    databaseURL: "https://test-3fbc1-default-rtdb.firebaseio.com",
+    projectId: "test-3fbc1",
+    storageBucket: "test-3fbc1.appspot.com",
+    messagingSenderId: "429153088555",
+    appId: "1:429153088555:web:a81e657e484b00d157a66e",
+    measurementId: "G-8Q9ES5P84T",
   );
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -64,7 +65,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '429153088555',
     projectId: 'test-3fbc1',
     storageBucket: 'test-3fbc1.appspot.com',
-    androidClientId: '429153088555-n4rbc2vfar8vkvl18utupvm42v5ag3st.apps.googleusercontent.com',
+    androidClientId:
+        '429153088555-n4rbc2vfar8vkvl18utupvm42v5ag3st.apps.googleusercontent.com',
     iosBundleId: 'com.example.myApp',
   );
 
@@ -74,7 +76,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '429153088555',
     projectId: 'test-3fbc1',
     storageBucket: 'test-3fbc1.appspot.com',
-    androidClientId: '429153088555-n4rbc2vfar8vkvl18utupvm42v5ag3st.apps.googleusercontent.com',
+    androidClientId:
+        '429153088555-n4rbc2vfar8vkvl18utupvm42v5ag3st.apps.googleusercontent.com',
     iosBundleId: 'com.example.myApp',
   );
 

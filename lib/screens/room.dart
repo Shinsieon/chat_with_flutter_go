@@ -15,9 +15,9 @@ class Message {
 }
 
 class RoomScreen extends StatefulWidget {
-  final ChatRoom chatRoom;
+  final String chatRoomId;
 
-  const RoomScreen({super.key, required this.chatRoom});
+  const RoomScreen({super.key, required this.chatRoomId});
 
   @override
   State<RoomScreen> createState() => _RoomScreenState();
@@ -39,7 +39,7 @@ class _RoomScreenState extends State<RoomScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: widget.chatRoom.roomName),
+      appBar: const CustomAppBar(title: ''),
       body: Column(
         children: [
           // 메시지 리스트 영역
