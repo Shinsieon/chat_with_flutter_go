@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/colors.dart';
 import 'package:my_app/enums.dart';
 
 // 버튼 크기 Enum
@@ -16,7 +17,7 @@ class CustomButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.onPressed,
-    this.backgroundColor = Colors.blue,
+    this.backgroundColor = AppColors.okButtonColor,
     this.textColor = Colors.white,
     this.borderRadius = 15.0,
     this.size = ButtonSize.medium, // 기본값을 medium으로 설정
