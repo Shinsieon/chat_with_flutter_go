@@ -56,7 +56,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
   @override
   void initState() {
     super.initState();
-    //_fetchChatRooms();
+    _fetchChatRooms();
   }
 
   Future<void> _fetchChatRooms() async {
